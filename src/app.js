@@ -1,6 +1,7 @@
 import '@tarojs/async-await'
 import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
+import '@tarojs/async-await'
 
 import Index from './pages/index'
 
@@ -17,32 +18,30 @@ import './app.less'
 const store = configStore()
 
 class App extends Component {
-
   config = {
-    pages: [
-      'pages/index/index'
-    ],
+    pages: ['pages/index/index'],
     window: {
-      backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
+      backgroundTextStyle: 'dark',
+      navigationBarBackgroundColor: '#ebebeb',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
-    }
+      navigationBarTextStyle: 'black',
+      disableScroll:false
+    },
   }
 
-  componentDidMount () {}
+  componentDidMount() {}
 
-  componentDidShow () {}
+  componentDidShow() {}
 
-  componentDidHide () {}
+  componentDidHide() {}
 
-  componentCatchError () {}
+  componentCatchError() {}
 
-  componentDidCatchError () {}
+  componentDidCatchError() {}
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
-  render () {
+  render() {
     return (
       <Provider store={store}>
         <Index />

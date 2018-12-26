@@ -87,10 +87,10 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@tarojs/async-await@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@tarojs/async-await/-/async-await-1.2.1.tgz#0d002ad27d8328242c1982ec5a9cb60f1ef5b2f1"
-  integrity sha512-4ftsqqyjH2tvyadz0uX8LTJkabExCXEeAm4AsBVgUpZwbUgG0oHDkfSlDlCvXIcdPbGi63Kvj9NJx0uGC6TJgA==
+"@tarojs/async-await@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@tarojs/async-await/-/async-await-1.2.2.tgz#3d5a0ccb8e52be1d8e429dbc4aa11a0171fc263c"
+  integrity sha512-gbIr9BZRINWxUCE0o9TG9kE44/7PtoR1o7JLkMRWhnUdrEteXHy78QTSvq4pYl2Bv+k4ags/pL4j3x5LKYDAYQ==
   dependencies:
     promise-polyfill "^7.1.2"
     regenerator-runtime "^0.11.1"
@@ -125,6 +125,13 @@
   integrity sha512-NHq4CqIb+kOWxEZPAFFErRA/MOsVbkJovwekoLnWfNyO6X/tKuSes0+HObp80OCdzDjXwJri7kVUV+q7ix5Svw==
   dependencies:
     less "^3.0.4"
+
+"@tarojs/plugin-sass@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@tarojs/plugin-sass/-/plugin-sass-1.2.2.tgz#3ee84033d30de87c2c7b46c0b84fa5457866f07a"
+  integrity sha512-N0U790k1A4Yb2GwUcQjik2ZKpW11sDscnyaX5KEbkcBf4EDuVsuc+Bs66A84VCahtNBrSzxKq2r7jRnKz807WA==
+  dependencies:
+    node-sass "^4.8.3"
 
 "@tarojs/plugin-uglifyjs@^1.2.1":
   version "1.2.1"
@@ -277,7 +284,7 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.8.tgz#8ae4e0ea205fe95c3901a5a1df7f66495e3a56ce"
   integrity sha512-3AQoUxQcQtLHsK25wtTWIoIpgYjH3vSDroZOUr7PpCHw/jLY1RB9z9E8dBT/OSmwStVgkRNvdh+ZHNiomRieaw==
 
-"@types/react@^16.4.8":
+"@types/react@^16.4.8", "@types/react@^16.7.3":
   version "16.7.18"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.7.18.tgz#f4ce0d539a893dd61e36cd11ae3a5e54f5a48337"
   integrity sha512-Tx4uu3ppK53/iHk6VpamMP3f3ahfDLEVt3ZQc8TFm30a1H3v9lMsCntBREswZIW/SKrvJjkb3Hq8UwO6GREBng==
@@ -1409,6 +1416,11 @@ binary-extensions@^1.0.0:
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-1.12.0.tgz#c2d780f53d45bba8317a8902d4ceeaf3a6385b14"
   integrity sha512-DYWGk01lDcxeS/K9IHPGWfT8PsJmbXRtRd2Sx72Tnb8pcYZQFF1oSDb8hJtS1vhp212q1Rzi5dUf9+nq0o9UIg==
 
+bind-decorator@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/bind-decorator/-/bind-decorator-1.0.11.tgz#e41bc06a1f65dd9cec476c91c5daf3978488252f"
+  integrity sha1-5BvAah9l3ZzsR2yRxdrzl4SIJS8=
+
 block-stream@*:
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/block-stream/-/block-stream-0.0.9.tgz#13ebfe778a03205cfe03751481ebb4b3300c126a"
@@ -1786,7 +1798,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5:
+classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
@@ -2266,6 +2278,11 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
   integrity sha1-6vQ5/U1ISK105cx9vvIAZyueNFs=
+
+dayjs@^1.7.7:
+  version "1.7.8"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.7.8.tgz#05d288f8d4b2140110cc1519cfe317d6f1f11a3c"
+  integrity sha512-Gp4Y5KWeSri0QOWGzHQz7VrKDkfEpS92dCLK7P8hYowRFbaym1vj3d6CoHio3apSS4KSi/qb5Edemv26IN5Hfg==
 
 debug@*, debug@^4.1.0:
   version "4.1.1"
@@ -6820,6 +6837,18 @@ tar@^4:
     mkdirp "^0.5.0"
     safe-buffer "^5.1.2"
     yallist "^3.0.2"
+
+taro-ui@^1.5.3:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/taro-ui/-/taro-ui-1.5.3.tgz#ca253954bf5aff09a6389aaa353327a07f8da579"
+  integrity sha512-ZgddosuuC2y+PI874nlTZN6e3VBpN3zBup1MwFigyf7vgYkGODuSXzXQHqaKRbH3bMenDx8WQBkec8wplhCtgw==
+  dependencies:
+    "@types/react" "^16.7.3"
+    bind-decorator "^1.0.11"
+    classnames "^2.2.6"
+    dayjs "^1.7.7"
+    lodash "^4.17.10"
+    prop-types "^15.6.2"
 
 terser-webpack-plugin@^1.1.0:
   version "1.2.0"

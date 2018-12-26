@@ -1,62 +1,72 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
+import { AtTabBar } from 'taro-ui'
+import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
-import { Child } from "./Child";
 
 import './index.less'
+import Plan from './plan'
 
-
-@connect(({ counter }) => ({
-  counter
-}), (dispatch) => ({
-  add () {
-    dispatch(add())
-  },
-  dec () {
-    dispatch(minus())
-  },
-  asyncAdd () {
-    dispatch(asyncAdd())
-  }
-}))
+@connect(
+  ({ counter }) => ({
+    counter,
+  }),
+  dispatch => ({
+    add() {
+      dispatch(add())
+    },
+    dec() {
+      dispatch(minus())
+    },
+    asyncAdd() {
+      dispatch(asyncAdd())
+    },
+  })
+)
 class Index extends Component {
-
   config = {
-    navigationBarTitleText: '首页'
+    navigationBarTitleText: 'Ebbinghaus 记忆法',
   }
 
-  state = {
-    name: "吴迪"
+  constructor() {
+    super(...arguments)
+    this.state = { current: 0 }
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps)
   }
 
-  componentWillUnmount () { }
+  componentWillUnmount() {}
 
-  componentDidShow () {
-  }
-
-  componentDidHide () {
-  }
-  change(){
-    console.log("onchange");
+  componentDidShow() {}
+  componentDidHide() {}
+  handleClick(value) {
+    if(value===2){
+      
+    }
     this.setState({
-      name:'我是修改后的值'
+      current: value,
     })
   }
-  render () {
+
+  render() {
     return (
-      <View className='index'>
-        <Child name={this.state.name} onChange={this.onChange}></Child>
-        <Button className='add_btn' onClick={this.props.add}>+</Button>
-        <Button className='dec_btn' onClick={this.props.dec}>-</Button>
-        <Button className='dec_btn' onClick={this.props.asyncAdd}>asysnc</Button>
-        <View><Text>{this.props.counter.num}</Text></View>
-        <View><Text>Hello, World</Text></View>
+      <View>
+        <Plan />
+        <AtTabBar
+          className="bottomBar"
+          fixed
+          fontSize="14"
+          tabList={[
+            { title: '计划', iconType: 'bullet-list' },
+            { title: '拍照', iconType: 'camera' },
+            { title: '新建', iconType: 'folder' },
+          ]}
+          onClick={this.handleClick.bind(this)}
+          current={this.state.current}
+        />
       </View>
     )
   }
