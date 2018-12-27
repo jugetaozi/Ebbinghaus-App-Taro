@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View } from '@tarojs/components'
-import { AtProgress } from 'taro-ui'
+import { View, Text, Image } from '@tarojs/components'
+import { AtProgress, AtSwipeAction } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 import './cardItem.less'
 
@@ -9,19 +9,20 @@ import './cardItem.less'
   dispatch => ({})
 )
 class CardItem extends Component {
-  componentWillReceiveProps(nextProps) {
-  }
+  componentWillReceiveProps(nextProps) {}
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   componentWillUnmount() {}
 
   componentDidShow() {}
 
   componentDidHide() {}
+  onReviewTask(timestamp) {
+    Taro.navigateTo({ url: '/pages/review-task/review-task?timestamp=' + timestamp })
+  }
   render() {
-    const { reviewTime, context, percentage } = this.props.cardContext
+    const { reviewTime, context, percentage, fileList, timestamp } = this.props.cardContext
     const colorCompute = percentage => {
       if (percentage <= 25) {
         return '#FF4949'
@@ -33,15 +34,25 @@ class CardItem extends Component {
         return ''
       }
     }
-    return <View className="CardItem">
+    return (
+      <View onClick={this.onReviewTask.bind(this, timestamp)} className="CardItem">
         <View className="reviewTime">{reviewTime}</View>
         <View className="context">
           <Text>{context}</Text>
         </View>
         <View className="percentage">
-          <AtProgress isHidePercent className="percentage" percent={percentage * 100} color={colorCompute(percentage * 100)} />
+          <AtProgress
+            isHidePercent
+            className="percentage"
+            percent={percentage * 100}
+            color={colorCompute(percentage * 100)}
+          />
+        </View>
+        <View className="imgContainer">
+          {fileList.length && <Image className="img" mode="aspectFit" src={fileList[0].url} background-size="cover" />}
         </View>
       </View>
+    )
   }
 }
 CardItem.defaultProps = {

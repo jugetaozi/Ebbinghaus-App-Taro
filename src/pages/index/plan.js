@@ -29,35 +29,21 @@ class Plan extends Component {
   constructor() {
     super(...arguments)
     this.state = {
-      dateSel: '2018-04-22',
-      cardContextList: [
-        {
-          id: '',
-          updateTime: '',
-          reviewTime: getReviewTime(new Date('2018-12-25 12:00:00')),
-          context: '我是context',
-          percentage: 0.4,
-        },
-        {
-          id: '',
-          updateTime: '',
-          reviewTime: getReviewTime(new Date()),
-          context:
-            '我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context我是context',
-          percentage: 0.9,
-        },
-        { id: '', updateTime: '', reviewTime: getReviewTime(new Date()), context: '我是context', percentage: 0.4 },
-        { id: '', updateTime: '', reviewTime: getReviewTime(new Date()), context: '我是context2', percentage: 0.2 },
-        { id: '', updateTime: '', reviewTime: getReviewTime(new Date()), context: '我是context3', percentage: 0.6 },
-        { id: '', updateTime: '', reviewTime: getReviewTime(new Date()), context: '我是context4', percentage: 0.4 },
-      ],
-    }
+      dateSel: new Date().toLocaleDateString().replace(new RegExp('/', 'g'), '-'),
+       taskList: [] }
   }
 
-  componentWillReceiveProps(nextProps) {
-  }
+  componentWillReceiveProps(nextProps) {}
 
   componentWillUnmount() {}
+  componentDidMount() {
+
+
+    let taskList = Taro.getStorageSync('taskList')
+    taskList = taskList ? JSON.parse(taskList) : []
+    this.setState({ taskList: taskList })
+
+  }
 
   componentDidShow() {}
   componentDidHide() {}
@@ -72,9 +58,10 @@ class Plan extends Component {
     })
   }
   render() {
-    const { cardContextList } = this.state
-    const cardItem = cardContextList.map((item, index) => <CardItem cardContext={item} key={index} />)
-    return <View className="container">
+    const { taskList } = this.state
+    const cardItem = taskList.map((item, index) => <CardItem cardContext={item} key={index} />)
+    return (
+      <View className="container">
         <View className="page-body">
           <View className="page-section">
             <Picker mode="date" onChange={this.onDateChange}>
@@ -86,8 +73,20 @@ class Plan extends Component {
           </View>
         </View>
         {cardItem}
-        <AtTabBar className="bottomBar" fixed fontSize="14" tabList={[{ title: '计划', iconType: 'bullet-list' }, { title: '拍照', iconType: 'camera' }, { title: '新建', iconType: 'folder' }]} onClick={this.handleClick.bind(this)} current={this.state.current} />
+        <AtTabBar
+          className="bottomBar"
+          fixed
+          fontSize="14"
+          tabList={[
+            { title: '计划', iconType: 'bullet-list' },
+            { title: '拍照', iconType: 'camera' },
+            { title: '新建', iconType: 'folder' },
+          ]}
+          onClick={this.handleClick.bind(this)}
+          current={this.state.current}
+        />
       </View>
+    )
   }
 }
 

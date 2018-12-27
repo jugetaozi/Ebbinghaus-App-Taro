@@ -1,7 +1,6 @@
 import '@tarojs/async-await'
 import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
-import '@tarojs/async-await'
 
 import Index from './pages/index'
 
@@ -19,13 +18,13 @@ const store = configStore()
 
 class App extends Component {
   config = {
-    pages: ['pages/index/index'],
+    pages: ['pages/index/index', 'pages/new-task/new-task', 'pages/review-task/review-task'],
     window: {
       backgroundTextStyle: 'dark',
       navigationBarBackgroundColor: '#ebebeb',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black',
-      disableScroll:false
+      disableScroll: false,
     },
   }
 

@@ -5,8 +5,9 @@ import { connect } from '@tarojs/redux'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
 
-import './index.less'
 import Plan from './plan'
+import CreatePlan from './create-plan'
+import './index.less'
 
 @connect(
   ({ counter }) => ({
@@ -31,7 +32,7 @@ class Index extends Component {
 
   constructor() {
     super(...arguments)
-    this.state = { current: 0 }
+    this.state = { current: 0}
   }
 
   componentWillReceiveProps(nextProps) {
@@ -39,12 +40,42 @@ class Index extends Component {
   }
 
   componentWillUnmount() {}
+  componentDidMount() {
+    Taro.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.record']) {
+          Taro.authorize({ scope: 'scope.camera' })
+        }
+      },
+    })
+  }
 
   componentDidShow() {}
   componentDidHide() {}
   handleClick(value) {
-    if(value===2){
-      
+    if (value === 1) {
+      Taro.createCameraContext()
+
+      let self = this
+      Taro.chooseImage({
+        count: 1,
+        sizeType: ['compressed'],
+        sourceType: ['camera'],
+        success: function(res) {
+          console.log(res);
+          let imgSorce = res.tempFilePaths[0]
+          self.setState(
+            {
+              imgSorce: imgSorce,
+              recognized: !!imgSorce,
+            },
+            () => {
+              Taro.navigateTo({ url: '/pages/new-task/new-task?path=' + imgSorce })
+            }
+          )
+        },
+      })
+      return
     }
     this.setState({
       current: value,
@@ -52,9 +83,11 @@ class Index extends Component {
   }
 
   render() {
+    const { current } = this.state
     return (
-      <View>
-        <Plan />
+      <View className="container">
+        {current === 0 && <Plan />}
+        {current === 2 && <CreatePlan />}
         <AtTabBar
           className="bottomBar"
           fixed

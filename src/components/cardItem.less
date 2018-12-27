@@ -7,6 +7,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding-right: 200px;
+  position: relative;
   .reviewTime{
     color: #444444;
     text-align: left;
@@ -33,6 +35,21 @@
   }
   .percentage{
     bottom: 0;
-    margin: 10px 200px 30px 20px;
+    margin: 10px 0px 30px 20px;
+  }
+  .imgContainer{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    Image{
+      width: 160px;
+      height: 150px;
+    }
   }
 }
