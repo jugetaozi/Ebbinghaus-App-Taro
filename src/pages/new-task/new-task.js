@@ -1,15 +1,16 @@
 import Taro, { Component } from '@tarojs/taro'
 import { AtTextarea, AtImagePicker, AtButton } from 'taro-ui'
-import { View, Picker, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { getReviewDate } from '../../utils/forget'
 import './new-task.less'
+
 class NewTask extends Component {
   config = {
     navigationBarTitleText: 'New Task',
   }
   constructor() {
     super(...arguments)
-    this.state = { context: '', files: null, clickEnable: true }
+    this.state = { context: '', files: [] }
   }
 
   componentWillReceiveProps(nextProps) {}
@@ -46,12 +47,12 @@ class NewTask extends Component {
       updateTime: [timestamp],
       fileList: this.state.files,
       context: this.state.context,
-      isCompleted:false,
+      isCompleted: false,
       percentage: 1,
     })
     try {
       //计算出reviewTime
-      taskList.forEach((item) => {
+      taskList.forEach(item => {
         item.reviewTime = getReviewDate(item.updateTime)
       })
       Taro.setStorageSync('taskList', JSON.stringify(taskList))
@@ -82,15 +83,15 @@ class NewTask extends Component {
           <AtImagePicker
             multiple
             mode="aspectFit"
-            files={this.state.files}
-            onChange={this.onFilesChange.bind(this)}
-            onFail={this.onFilesFail.bind(this)}
+            onChange={
+              this.onFilesChange.bind(this) // files={this.state.files}
+            }
             onImageClick={this.onImageClick.bind(this)}
           />
         </View>
         <AtButton
           disabled={!Boolean(this.state.files !== null || this.state.context.trim())}
-          onClick={this.handleSaveTask}
+          onClick={this.handleSaveTask.bind(this)}
           className="saveTaskBtn"
           size="normal">
           完成

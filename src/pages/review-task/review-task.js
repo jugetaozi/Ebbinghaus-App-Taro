@@ -2,7 +2,9 @@ import Taro, { Component } from '@tarojs/taro'
 import { AtTextarea, AtImagePicker, AtButton } from 'taro-ui'
 import { View, Picker, Text } from '@tarojs/components'
 import { getReviewDate } from '../../utils/forget'
+
 import './review-task.less'
+
 class ReviewTask extends Component {
   config = {
     navigationBarTitleText: 'Review Task',
@@ -14,7 +16,7 @@ class ReviewTask extends Component {
       currentTask: [],
       updateTime: [],
       context: '',
-      files: null,
+      files: [],
       editEnable: false,
       taskList: [],
     }
@@ -116,13 +118,12 @@ class ReviewTask extends Component {
             mode="aspectFit"
             files={files}
             onChange={this.onFilesChange.bind(this)}
-            onFail={this.onFilesFail.bind(this)}
             onImageClick={this.onImageClick.bind(this)}
           />
         </View>
         <AtButton
-          disabled={!Boolean(this.state.files !== null || this.state.context.trim())}
-          onClick={this.handleSaveTask}
+          disabled={!Boolean(files !== null || context.trim())}
+          onClick={this.handleSaveTask.bind(this)}
           className="saveTaskBtn"
           size="normal">
           {`打卡(${updateTime.length}/4)`}

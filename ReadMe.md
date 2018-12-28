@@ -50,3 +50,35 @@
 
 ## Plan页面  
 ![mark](https://gitee.com/jugetaozi/picture_bed/raw/master/d798183ba2d56e48913859346509250.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300)
+
+## 遇到的一些坑
+
+- 在监听函数时  如果回调函数内有用到this  则需要bind(this)
+```
+handleClick(value) {
+   //有用到this 需要bind   this
+    this.setState({
+      current: value,
+    })
+  }
+
+render() {
+    const { taskList } = this.state
+    const cardItem = taskList.map((item, index) => <CardItem cardContext={item} key={index} />)
+    return (
+            <AtTabBar
+                className="bottomBar"
+                fixed
+                fontSize="14"
+                tabList={[
+                  { title: '计划', iconType: 'bullet-list' },
+                  { title: '拍照', iconType: 'camera' },
+                  { title: '新建', iconType: 'folder' },
+                ]}
+                onClick={this.handleClick.bind(this)}
+                current={this.state.current}
+            />)
+}
+
+```
+- 微信全局样式的引入 出现问题
