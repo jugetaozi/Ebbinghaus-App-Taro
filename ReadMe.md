@@ -1,7 +1,7 @@
 # Ebbinghaus 遗忘曲线小程序
 ## 基于taro开发  兼容微信小程序/H5/ReactNative
 
-查看demo
+### [查看demo](http://jugetaozi.gitee.io/ebbinghaus-app/) http://jugetaozi.gitee.io/ebbinghaus-app/
 
 ## Ebbinghaus 遗忘曲线 
 ![mark](https://gitee.com/jugetaozi/picture_bed/raw/master/ebbinghaus.jpg)
