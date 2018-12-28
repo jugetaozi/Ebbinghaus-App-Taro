@@ -27,7 +27,7 @@ import './index.less'
 )
 class Index extends Component {
   config = {
-    navigationBarTitleText: 'Ebbinghaus 记忆法',
+    navigationBarTitleText: 'Ebbinghaus 记忆法'
   }
 
   constructor() {
