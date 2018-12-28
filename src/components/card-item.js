@@ -2,6 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 import { AtProgress, AtSwipeAction } from 'taro-ui'
 import { connect } from '@tarojs/redux'
+import { getPercentage, getCurrentDate } from '../utils/forget'
 import './cardItem.less'
 
 @connect(
@@ -22,43 +23,40 @@ class CardItem extends Component {
     Taro.navigateTo({ url: '/pages/review-task/review-task?timestamp=' + timestamp })
   }
   render() {
-    const { reviewTime, context, percentage, fileList, timestamp } = this.props.cardContext
+    const { reviewTime, context, updateTime, fileList, timestamp, isCompleted } = this.props.cardContext
+    const percentage = getPercentage(updateTime)
+    // console.log(percentage, reviewTime, 'percentage-reviewTime')
     const colorCompute = percentage => {
       if (percentage <= 25) {
         return '#FF4949'
       } else if (percentage <= 50) {
-        return '#13CE66'
-      } else if (percentage <= 75) {
         return '#FFC82C'
-      } else {
+      } else if (percentage <= 75) {
         return ''
+      } else {
+        return '#13CE66'
       }
     }
-    return (
-      <View onClick={this.onReviewTask.bind(this, timestamp)} className="CardItem">
-        <View className="reviewTime">{reviewTime}</View>
+    return <View onClick={this.onReviewTask.bind(this, timestamp)} className={isCompleted ? 'CardItem Disabled' : 'CardItem'}>
+        <View className="reviewTime">{getCurrentDate(timestamp)}</View>
         <View className="context">
           <Text>{context}</Text>
         </View>
         <View className="percentage">
-          <AtProgress
-            isHidePercent
-            className="percentage"
-            percent={percentage * 100}
-            color={colorCompute(percentage * 100)}
-          />
+          <AtProgress isHidePercent className="percentage" percent={percentage} color={colorCompute(percentage)} />
         </View>
         <View className="imgContainer">
-          {fileList.length && <Image className="img" mode="aspectFit" src={fileList[0].url} background-size="cover" />}
+          {fileList.length && (
+            <Image className="img" mode="aspectFit" src={fileList[0].url} background-size="cover" />
+          )}
         </View>
       </View>
-    )
   }
 }
 CardItem.defaultProps = {
   cardContext: {
-    reviewTime: '2018-12-26',
-    context: '我是context',
+    reviewTime: '',
+    context: '',
     percentage: 0.4,
   },
 }

@@ -1,11 +1,10 @@
 import Taro, { Component } from '@tarojs/taro'
-import { AtIcon, AtTabBar } from 'taro-ui'
+import { AtIcon, AtTabBar, AtDivider } from 'taro-ui'
 import { View, Picker, Text } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
 import CardItem from '../../components/card-item.js'
-import { getReviewTime } from '../../utils/forget'
 
 import './Plan.less'
 
@@ -28,29 +27,60 @@ import './Plan.less'
 class Plan extends Component {
   constructor() {
     super(...arguments)
+    this.taskList = Taro.getStorageSync('taskList')
+
     this.state = {
       dateSel: new Date().toLocaleDateString().replace(new RegExp('/', 'g'), '-'),
-       taskList: [] }
+      taskList: [],
+    }
   }
 
   componentWillReceiveProps(nextProps) {}
 
   componentWillUnmount() {}
   componentDidMount() {
-
-
-    let taskList = Taro.getStorageSync('taskList')
-    taskList = taskList ? JSON.parse(taskList) : []
-    this.setState({ taskList: taskList })
-
+    //需要处理复习逻辑
+    this.taskList = this.taskList ? JSON.parse(this.taskList) : []
+    this.cardShowRule()
   }
-
+  cardShowRule() {
+    this.setState({ taskList: this.taskList })
+    console.log(this.taskList)
+    let _tempArr = []
+    const _this = this
+    this.taskList.forEach(item => {
+      // console.log(item.reviewTime,new Date(item.reviewTime).toLocaleDateString(), new Date(_this.state.dateSel).toLocaleDateString())
+      if (new Date(item.reviewTime).toLocaleDateString() === new Date(_this.state.dateSel).toLocaleDateString()) {
+        _tempArr.push(item)
+      }
+    })
+    _tempArr.sort((a, b) => {
+      //根据time排序
+      return a.reviewTime - b.reviewTime
+    })
+    let _tempArr1 = []
+    let _tempArr2 = []
+    _tempArr.forEach(item => {
+      if (!item.isCompleted) {
+        _tempArr1.push(item)
+      } else {
+        _tempArr2.push(item)
+      }
+    })
+    _tempArr = _tempArr1.concat(_tempArr2)
+    this.setState({ taskList: _tempArr })
+  }
   componentDidShow() {}
   componentDidHide() {}
   onDateChange = e => {
-    this.setState({
-      dateSel: e.detail.value,
-    })
+    this.setState(
+      {
+        dateSel: e.detail.value,
+      },
+      () => {
+        this.cardShowRule()
+      }
+    )
   }
   handleClick(value) {
     this.setState({
@@ -72,7 +102,7 @@ class Plan extends Component {
             </Picker>
           </View>
         </View>
-        {cardItem}
+        {taskList.length ? cardItem : <Text className="tips">当天没有要复习的计划了~~</Text>}
         <AtTabBar
           className="bottomBar"
           fixed

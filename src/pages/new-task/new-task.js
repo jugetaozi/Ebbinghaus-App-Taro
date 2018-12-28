@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { AtTextarea, AtImagePicker, AtButton } from 'taro-ui'
 import { View, Picker, Text } from '@tarojs/components'
-import { getReviewTime, getPercentage } from '../../utils/forget'
+import { getReviewDate } from '../../utils/forget'
 import './new-task.less'
 class NewTask extends Component {
   config = {
@@ -9,7 +9,7 @@ class NewTask extends Component {
   }
   constructor() {
     super(...arguments)
-    this.state = { context: '', files: null }
+    this.state = { context: '', files: null, clickEnable: true }
   }
 
   componentWillReceiveProps(nextProps) {}
@@ -38,22 +38,24 @@ class NewTask extends Component {
   }
   handleSaveTask() {
     let taskList = Taro.getStorageSync('taskList')
-    console.log(taskList)
     taskList = taskList ? JSON.parse(taskList) : []
     console.log(taskList, 'taskList')
     const timestamp = Date.now()
     taskList.push({
       timestamp: timestamp,
       updateTime: [timestamp],
-      reviewTime: getReviewTime(timestamp),
       fileList: this.state.files,
       context: this.state.context,
-      percentage: getPercentage(timestamp),
+      isCompleted:false,
+      percentage: 1,
     })
-    console.log(JSON.stringify(taskList))
     try {
-      const value = Taro.setStorageSync('taskList', JSON.stringify(taskList))
-      Taro.navigateTo({ url: '/pages/index/index' })
+      //计算出reviewTime
+      taskList.forEach((item) => {
+        item.reviewTime = getReviewDate(item.updateTime)
+      })
+      Taro.setStorageSync('taskList', JSON.stringify(taskList))
+      Taro.redirectTo({ url: '/pages/index/index' })
     } catch (e) {
       // Do something when catch error
     }
@@ -67,7 +69,6 @@ class NewTask extends Component {
             className="AtTextarea"
             value={this.state.context}
             onChange={this.handlecontextChange.bind(this)}
-            autoFocus
             textOverflowForbidden={false}
             count
             height="500"
@@ -87,7 +88,11 @@ class NewTask extends Component {
             onImageClick={this.onImageClick.bind(this)}
           />
         </View>
-        <AtButton onClick={this.handleSaveTask} className="saveTaskBtn" size="normal">
+        <AtButton
+          disabled={!Boolean(this.state.files !== null || this.state.context.trim())}
+          onClick={this.handleSaveTask}
+          className="saveTaskBtn"
+          size="normal">
           完成
         </AtButton>
       </View>

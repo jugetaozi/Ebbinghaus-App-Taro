@@ -1,15 +1,23 @@
 import Taro, { Component } from '@tarojs/taro'
 import { AtTextarea, AtImagePicker, AtButton } from 'taro-ui'
 import { View, Picker, Text } from '@tarojs/components'
-import { getReviewTime, getPercentage } from '../../utils/forget'
+import { getReviewDate } from '../../utils/forget'
 import './review-task.less'
 class ReviewTask extends Component {
   config = {
-    navigationBarTitleText: 'New Task',
+    navigationBarTitleText: 'Review Task',
   }
   constructor() {
     super(...arguments)
-    this.state = { currentTaskIndex: 0, updateTime: [], context: '', files: null, editEnable: false, taskList: [] }
+    this.state = {
+      currentTaskIndex: 0,
+      currentTask: [],
+      updateTime: [],
+      context: '',
+      files: null,
+      editEnable: false,
+      taskList: [],
+    }
   }
 
   componentWillReceiveProps(nextProps) {}
@@ -18,7 +26,6 @@ class ReviewTask extends Component {
   componentDidMount() {
     let taskList = Taro.getStorageSync('taskList')
     taskList = taskList ? JSON.parse(taskList) : []
-    console.log(this.$router.params)
     const currentTask = taskList.find((item, index) => {
       if (+item.timestamp === +this.$router.params.timestamp) {
         this.setState({ currentTaskIndex: index })
@@ -26,7 +33,7 @@ class ReviewTask extends Component {
       } else {
         return false
       }
-    })
+    }) || { updateTime: null, currentTask: null, context: '', fileList: null, taskList: null }
     this.setState(
       {
         updateTime: currentTask.updateTime,
@@ -64,16 +71,19 @@ class ReviewTask extends Component {
     currentTask.updateTime.push(timestamp)
     currentTask.fileList = this.state.files
     currentTask.context = this.state.context
-    currentTask.percentage = getPercentage(timestamp)
+    currentTask.percentage = 1
+    currentTask.isCompleted = false
+    currentTask.reviewTime = getReviewDate(currentTask.updateTime)
 
     let saveTaskList = JSON.parse(Taro.getStorageSync('taskList'))
 
     if (currentTask.updateTime.length >= 4) {
-      saveTaskList.splice(this.state.currentTaskIndex, 1)
-    } else {
-      saveTaskList[this.state.currentTaskIndex] = currentTask
+      currentTask.isCompleted = true
     }
-    console.log(saveTaskList)
+    //   saveTaskList.splice(this.state.currentTaskIndex, 1)
+    // } else {
+    saveTaskList[this.state.currentTaskIndex] = currentTask
+    // }
     try {
       Taro.setStorageSync('taskList', JSON.stringify(saveTaskList))
       Taro.redirectTo({ url: '/pages/index/index' })
@@ -91,7 +101,6 @@ class ReviewTask extends Component {
             className="AtTextarea"
             value={context}
             onChange={this.handlecontextChange.bind(this)}
-            autoFocus
             textOverflowForbidden={false}
             count
             height="500"
@@ -111,7 +120,11 @@ class ReviewTask extends Component {
             onImageClick={this.onImageClick.bind(this)}
           />
         </View>
-        <AtButton onClick={this.handleSaveTask} className="saveTaskBtn" size="normal">
+        <AtButton
+          disabled={!Boolean(this.state.files !== null || this.state.context.trim())}
+          onClick={this.handleSaveTask}
+          className="saveTaskBtn"
+          size="normal">
           {`打卡(${updateTime.length}/4)`}
         </AtButton>
       </View>
