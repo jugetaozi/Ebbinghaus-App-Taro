@@ -4,11 +4,13 @@
 	"description": "des",
 	"appid": "wx42bb14c772ef7f76",
 	"setting": {
-		"urlCheck": true,
-		"es6": false,
-		"postcss": false,
-		"minified": false,
-		"newFeature": true
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false,
+		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
 	"condition": {}

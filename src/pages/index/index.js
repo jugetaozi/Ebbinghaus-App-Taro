@@ -27,12 +27,12 @@ import './index.less'
 )
 class Index extends Component {
   config = {
-    navigationBarTitleText: 'Ebbinghaus 记忆法'
+    navigationBarTitleText: 'Ebbinghaus 记忆法',
   }
 
   constructor() {
     super(...arguments)
-    this.state = { current: 0}
+    this.state = { current: 0 }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,6 +41,9 @@ class Index extends Component {
 
   componentWillUnmount() {}
   componentDidMount() {
+    getApp().mtj.trackEvent('enter', {
+      product: '进入主页面',
+    })
     Taro.getSetting({
       success(res) {
         if (!res.authSetting['scope.record']) {
@@ -54,6 +57,7 @@ class Index extends Component {
   componentDidHide() {}
   handleClick(value) {
     if (value === 1) {
+      getApp().mtj.trackEvent('camera', { event: '调用照相功能' })
       Taro.createCameraContext()
 
       let self = this
@@ -62,7 +66,9 @@ class Index extends Component {
         sizeType: ['compressed'],
         sourceType: ['camera'],
         success: function(res) {
-          console.log(res);
+          getApp().mtj.trackEvent('enter', {
+            event: '拍照成功',
+          })
           let imgSorce = res.tempFilePaths[0]
           self.setState(
             {
