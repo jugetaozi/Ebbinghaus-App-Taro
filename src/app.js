@@ -1,4 +1,7 @@
 import './utils/mtj-wx-sdk'
+import gio from './utils/gio-minp'
+gio('init', '88e03498caa6e2d7', 'wx42bb14c772ef7f76', {version: '1.0' })
+
 import '@tarojs/async-await'
 import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'

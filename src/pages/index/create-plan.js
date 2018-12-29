@@ -2,6 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { AtButton } from 'taro-ui'
 import { View, Picker, Text } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
+import gio from '../../utils/gio-minp'
 
 import './create-plan.less'
 
@@ -10,7 +11,7 @@ class CreatePlan extends Component {
     super(...arguments)
     this.state = {
       hasUserInfo: false,
-      userInfo: {}
+      userInfo: {},
     }
   }
 
@@ -38,13 +39,18 @@ class CreatePlan extends Component {
   }
   bindGetUserInfo(data) {
     if (data.detail.rawData) {
+      console.log(data.detail.rawData)
       //用户按了允许授权按钮
       Taro.navigateTo({ url: '/pages/new-task/new-task' })
       this.setState({ userInfo: data.detail.userInfo, hasUserInfo: true })
+      gio('setVisitor', data.detail.userInfo)
       getApp().mtj.trackEvent('getuserinfosuccess', {
         userInfo: data.detail.userInfo,
         rawData: data.detail.rawData,
         nickName: data.detail.userInfo.nickName,
+      })
+      Taro.reportAnalytics('getinfosuccess', {
+        userinfosuccess: data.detail.userInfo,
       })
     } else {
       getApp().mtj.trackEvent('getuserinfofail', { event: 'fail' })
