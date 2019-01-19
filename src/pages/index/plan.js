@@ -45,7 +45,8 @@ class Plan extends Component {
     let _tempArr = []
     const _this = this
     this.taskList.forEach(item => {
-      if (new Date(item.reviewTime).toLocaleDateString() === _this.state.dateSel.replace(new RegExp('-', 'g'), '/')) {
+      console.log(item.reviewTime, _this.state.dateSel,new Date(item.reviewTime).toLocaleDateString() , _this.state.dateSel.replace(new RegExp('-', 'g'), '/'))
+      if (new Date(item.reviewTime).toLocaleDateString() === new Date(_this.state.dateSel.replace(new RegExp('-', 'g'), '/')).toLocaleDateString()) {
         _tempArr.push(item)
       }
     })
@@ -63,7 +64,9 @@ class Plan extends Component {
       }
     })
     _tempArr = _tempArr1.concat(_tempArr2)
-    this.setState({ taskList: _tempArr })
+    this.setState({ taskList: _tempArr },() => {
+      console.log(_this.taskList, _tempArr,'_this.taskList,_tempArr')
+    })
   }
   componentDidShow() {}
   componentDidHide() {}
