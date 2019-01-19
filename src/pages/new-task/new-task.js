@@ -41,7 +41,8 @@ class NewTask extends Component {
     let taskList = Taro.getStorageSync('taskList')
     taskList = taskList ? JSON.parse(taskList) : []
     console.log(taskList, 'taskList')
-    const timestamp = Date.now()
+    const timestamp = new Date('2019/01/10 10:00:00').getTime()
+    console.log(timestamp)
     taskList.push({
       timestamp: timestamp,
       updateTime: [timestamp],

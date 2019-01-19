@@ -5,7 +5,7 @@ export const getCurrentDate = data => {
   const todayHour = new Date().getHours()
   // console.log(todayHour, dateGap, now, data)
   if (dateGap > todayHour + 24) {
-    return data.toLocaleDateString().replace(new RegExp('/', 'g'), '-')
+    return new Date(data).toLocaleDateString().replace(new RegExp('/', 'g'), '-')
   } else if (todayHour < dateGap && dateGap <= todayHour + 24) {
     return `昨天`
   } else {
@@ -93,7 +93,7 @@ export const getPercentage = updateTime => {
         return -0.0001 * dateGap * forgetFactor + 18
       }
     }
-    
+
   } else {
     return 0
   }

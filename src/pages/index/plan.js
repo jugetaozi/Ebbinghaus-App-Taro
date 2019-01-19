@@ -29,10 +29,7 @@ class Plan extends Component {
     super(...arguments)
     this.taskList = Taro.getStorageSync('taskList')
 
-    this.state = {
-      dateSel: new Date().toLocaleDateString().replace(new RegExp('/', 'g'), '-'),
-      taskList: [],
-    }
+    this.state = { dateSel: new Date().toLocaleDateString().replace(new RegExp('/', 'g'), '-'), taskList: [] }
   }
 
   componentWillReceiveProps(nextProps) {}
@@ -44,13 +41,11 @@ class Plan extends Component {
     this.cardShowRule()
   }
   cardShowRule() {
-    this.setState({ taskList: this.taskList })
-    console.log(this.taskList)
+    // this.setState({ taskList: this.taskList })
     let _tempArr = []
     const _this = this
     this.taskList.forEach(item => {
-      // console.log(item.reviewTime,new Date(item.reviewTime).toLocaleDateString(), new Date(_this.state.dateSel).toLocaleDateString())
-      if (new Date(item.reviewTime).toLocaleDateString() === new Date(_this.state.dateSel).toLocaleDateString()) {
+      if (new Date(item.reviewTime).toLocaleDateString() === _this.state.dateSel.replace(new RegExp('-', 'g'), '/')) {
         _tempArr.push(item)
       }
     })
