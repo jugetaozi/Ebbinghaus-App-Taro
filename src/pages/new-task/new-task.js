@@ -28,6 +28,7 @@ class NewTask extends Component {
     this.setState({ context: event.target.value })
   }
   onFilesChange(value) {
+    console.log(value);
     this.setState({ files: value })
   }
   onImageClick(e) {
@@ -82,6 +83,7 @@ class NewTask extends Component {
           <AtImagePicker
             multiple
             mode="aspectFit"
+            files={this.state.files}
             onChange={
               this.onFilesChange.bind(this) // files={this.state.files}
             }

@@ -70,11 +70,13 @@ class CreatePlan extends Component {
           size="normal">
           新建一个任务
         </AtButton>
-        <Text className="tips">
-          小tips：&nbsp;&nbsp;&nbsp;
+        <Text decode className="tips">
+          小tips： &nbsp; &nbsp; &nbsp;
           研究表明，当一件事情在第1、3、7、20天重复深度记忆，那么这件事情你一辈子都不会忘记了。
         </Text>
-        <Text className="tips">赶紧记录你想要记住的事情吧 &nbsp;๑乛◡乛๑</Text>
+        <Text decode className="tips">
+          赶紧记录你想要记住的事情吧 &nbsp; ๑乛◡乛๑
+        </Text>
       </View>
     )
   }
