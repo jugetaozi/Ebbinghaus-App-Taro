@@ -39,17 +39,23 @@
 `npm run dev:rn`
 ## New Task
 
-![mark]("./static/image/01201e52b16f45c7f0d0dcc0c4f2fdf.jpg")
+![1201e52b16f45c7f0d0dcc0c4f2fd](C:\Users\jugetaozi\Desktop\github代码库\Ebbinghaus-App\static\image\01201e52b16f45c7f0d0dcc0c4f2fdf.jpg)
+
+
 
 
 
 ## Review Task
 * 提交一个任务后  会分别在 1 3 7 天的事件点通知复习  每次打卡完毕回复熟练度
-![mark]("./static/image/164893eb5b301fcbf28af8ed297645d.jpg")
+  ![64893eb5b301fcbf28af8ed297645](C:\Users\jugetaozi\Desktop\github代码库\Ebbinghaus-App\static\image\164893eb5b301fcbf28af8ed297645d.jpg)
+
+  ​
 
 
 ## Plan页面
-![mark]("./static/image/d798183ba2d56e48913859346509250.jpg")
+![798183ba2d56e4891385934650925](C:\Users\jugetaozi\Desktop\github代码库\Ebbinghaus-App\static\image\d798183ba2d56e48913859346509250.jpg)
+
+
 
 ## 遇到的一些坑
 
