@@ -39,17 +39,17 @@
 `npm run dev:rn`
 ## New Task
 
-![mark](https://gitee.com/jugetaozi/picture_bed/raw/master/01201e52b16f45c7f0d0dcc0c4f2fdf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300)
+![mark]("./static/image/01201e52b16f45c7f0d0dcc0c4f2fdf.jpg")
 
 
 
 ## Review Task
 * 提交一个任务后  会分别在 1 3 7 天的事件点通知复习  每次打卡完毕回复熟练度
-![mark](https://gitee.com/jugetaozi/picture_bed/raw/master/164893eb5b301fcbf28af8ed297645d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300)
+![mark]("./static/image/164893eb5b301fcbf28af8ed297645d.jpg")
 
 
 ## Plan页面
-![mark](https://gitee.com/jugetaozi/picture_bed/raw/master/d798183ba2d56e48913859346509250.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300)
+![mark]("./static/image/d798183ba2d56e48913859346509250.jpg")
 
 ## 遇到的一些坑
 
