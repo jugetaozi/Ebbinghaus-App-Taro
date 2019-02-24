@@ -39,7 +39,7 @@
 `npm run dev:rn`
 ## New Task
 
-![1201e52b16f45c7f0d0dcc0c4f2fd](C:\Users\jugetaozi\Desktop\github代码库\Ebbinghaus-App\static\image\01201e52b16f45c7f0d0dcc0c4f2fdf.jpg)
+![mark](http://jugetaozi.com/a/20190224/C4nUkkGiCoAt.jpg?imageslim)
 
 
 
@@ -47,13 +47,13 @@
 
 ## Review Task
 * 提交一个任务后  会分别在 1 3 7 天的事件点通知复习  每次打卡完毕回复熟练度
-  ![64893eb5b301fcbf28af8ed297645](C:\Users\jugetaozi\Desktop\github代码库\Ebbinghaus-App\static\image\164893eb5b301fcbf28af8ed297645d.jpg)
+  ![mark](http://jugetaozi.com/a/20190224/r7K1JV52n57B.jpg?imageslim)
 
   ​
 
 
 ## Plan页面
-![798183ba2d56e4891385934650925](C:\Users\jugetaozi\Desktop\github代码库\Ebbinghaus-App\static\image\d798183ba2d56e48913859346509250.jpg)
+![mark](http://jugetaozi.com/a/20190224/v4xKhsKWIHPR.jpg?imageslim)
 
 
 
